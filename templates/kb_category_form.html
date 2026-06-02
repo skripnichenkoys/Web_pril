@@ -1,0 +1,19 @@
+{% extends "kb_base.html" %}
+{% block content %}
+<h2>Редактировать категорию: {{ category.name }}</h2>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.name.label }}<br>
+        {{ form.name(size=40) }}
+    </div>
+    <div class="form-group">
+        {{ form.description.label }}<br>
+        {{ form.description(size=60) }}
+    </div>
+    <div>
+        <input type="submit" value="💾 Сохранить">
+        <a href="{{ url_for('categories_list') }}">Отмена</a>
+    </div>
+</form>
+{% endblock %}

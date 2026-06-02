@@ -1,0 +1,29 @@
+{% extends "pm_base.html" %}
+{% block content %}
+<h2>{{ title }}</h2>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.name.label }}<br>
+        {{ form.name(size=60) }}
+    </div>
+    <div class="form-group">
+        {{ form.description.label }}<br>
+        {{ form.description(rows=5, cols=60) }}
+    </div>
+    <div class="form-group">
+        {{ form.start_date.label }}<br>
+        {{ form.start_date() }}<br>
+        <small>Формат: ГГГГ-ММ-ДД (например: 2026-06-01)</small>
+    </div>
+    <div class="form-group">
+        {{ form.end_date.label }}<br>
+        {{ form.end_date() }}<br>
+        <small>Формат: ГГГГ-ММ-ДД (необязательно)</small>
+    </div>
+    <div>
+        <input type="submit" value="💾 Сохранить">
+        <a href="{{ url_for('projects') }}">Отмена</a>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "pm_base.html" %}
+{% block content %}
+<h2>{{ title }} для проекта "{{ project.name }}"</h2>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.title.label }}<br>
+        {{ form.title(size=60) }}
+    </div>
+    <div class="form-group">
+        {{ form.description.label }}<br>
+        {{ form.description(rows=4, cols=60) }}
+    </div>
+    <div class="form-group">
+        {{ form.status.label }}<br>
+        {{ form.status() }}
+    </div>
+    <div class="form-group">
+        {{ form.priority.label }}<br>
+        {{ form.priority() }}
+    </div>
+    <div class="form-group">
+        {{ form.assignee.label }}<br>
+        {{ form.assignee(size=40) }}
+    </div>
+    <div>
+        <input type="submit" value="💾 Сохранить">
+        <a href="{{ url_for('view_project', id=project.id) }}">Отмена</a>
+    </div>
+</form>
+{% endblock %}

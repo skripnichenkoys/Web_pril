@@ -1,0 +1,43 @@
+{% extends "kb_base.html" %}
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <h2>📚 База знаний компании</h2>
+    <a href="{{ url_for('add_article') }}" class="btn">➕ Новая статья</a>
+</div>
+
+{% if articles %}
+    <div class="grid">
+        {% for article in articles %}
+        <div class="project-card">
+            <div class="project-header">
+                <h3 style="color: #2e7d32;">{{ article.title }}</h3>
+            </div>
+            <div class="project-body">
+                <div style="margin-bottom: 15px;">
+                    <span class="badge badge-low">✍️ {{ article.author }}</span>
+                    <span class="badge badge-medium">📅 {{ article.updated_at.strftime('%d.%m.%Y') }}</span>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    {% for cat in article.categories %}
+                        <span class="badge" style="background: #e8f5e9; color: #2e7d32;">#{{ cat.name }}</span>
+                    {% endfor %}
+                </div>
+                <p style="color: #666; line-height: 1.5;">{{ article.content[:150] }}{% if article.content|length > 150 %}...{% endif %}</p>
+            </div>
+            <div class="project-footer">
+                <a href="{{ url_for('view_article', id=article.id) }}" class="btn" style="flex: 1; text-align: center;">👁️ Читать</a>
+                <a href="{{ url_for('edit_article', id=article.id) }}" class="btn btn-warning" style="flex: 1; text-align: center;">✏️ Редактировать</a>
+                <form action="{{ url_for('delete_article', id=article.id) }}" method="post" style="flex: 1;">
+                    <button type="submit" class="btn btn-danger" style="width: 100%;" onclick="return confirm('Удалить статью?')">🗑️ Удалить</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="card" style="text-align: center; padding: 60px;">
+        <p style="font-size: 1.2rem; color: #666;">📭 Нет статей в базе знаний</p>
+        <a href="{{ url_for('add_article') }}" class="btn" style="margin-top: 20px;">Создать первую статью</a>
+    </div>
+{% endif %}
+{% endblock %}

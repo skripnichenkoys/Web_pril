@@ -1,0 +1,28 @@
+{% extends "kb_base.html" %}
+{% block content %}
+<h2>{{ title }}</h2>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.title.label }}<br>
+        {{ form.title(size=80) }}
+    </div>
+    <div class="form-group">
+        {{ form.content.label }}<br>
+        {{ form.content(rows=15, cols=80) }}
+    </div>
+    <div class="form-group">
+        {{ form.author.label }}<br>
+        {{ form.author(size=40) }}
+    </div>
+    <div class="form-group">
+        {{ form.categories.label }}<br>
+        {{ form.categories(size=60) }}<br>
+        <small>Например: приманки, воблеры, крючки</small>
+    </div>
+    <div>
+        <input type="submit" value="💾 Сохранить">
+        <a href="{{ url_for('index') }}">Отмена</a>
+    </div>
+</form>
+{% endblock %}
